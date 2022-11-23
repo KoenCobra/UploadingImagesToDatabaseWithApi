@@ -6,7 +6,7 @@ public class QrBuildingProblem
 {
     public int Id { get; set; }
 
-    [Required] public string? BuildingName { get; set; }
+    [Required(ErrorMessage = "Please give building name")] public string? BuildingName { get; set; }
 
     [Required] public string? Description { get; set; }
 
