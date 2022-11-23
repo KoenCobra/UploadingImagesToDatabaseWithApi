@@ -2,47 +2,50 @@
 @using UploadingImagesToDatabaseWithApi.Shared
 @inject HttpClient HttpClient
 
-<EditForm Model="BuildingProblem" OnInvalidSubmit="UploadProblem">
-    <DataAnnotationsValidator />
-    <div class="input">
-        <label>Naam Residentie</label>
-        <InputText @bind-Value="BuildingProblem.BuildingName"></InputText>
-    </div>
-    <div class="input">
-        <label>Beschrijf het probleem</label>
-        <InputTextArea @bind-Value="BuildingProblem.BuildingName"></InputTextArea>
-    </div>
+<div class="container">
+    <EditForm Model="BuildingProblem" OnInvalidSubmit="UploadProblem">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <div class="input">
+            <label>Naam Residentie</label>
+            <InputText @bind-Value="BuildingProblem.BuildingName"></InputText>
+        </div>
+        <div class="input">
+            <label>Beschrijf het probleem</label>
+            <InputTextArea @bind-Value="BuildingProblem.BuildingName"></InputTextArea>
+        </div>
 
-    <div class="input">
-        <label>Upload images</label>
-        <InputFile OnChange="OnFileChange" multiple></InputFile>
-    </div>
-    <div class="selected-images">
+        <div class="input">
+            <label>Upload images</label>
+            <InputFile OnChange="OnFileChange" multiple></InputFile>
+        </div>
+        <div class="selected-images">
 
-        @if (BuildingProblem.Images != null)
-        {
-            foreach (var img in BuildingProblem.Images)
+            @if (BuildingProblem.Images != null)
             {
-                <img src="@img.Data" alt="image" />
-                <button @onclick="() => RemoveImage(img.Data)">X</button>
+                foreach (var img in BuildingProblem.Images)
+                {
+                    <img src="@img.Data" alt="image" />
+                    <button @onclick="() => RemoveImage(img.Data)">X</button>
+                }
             }
-        }
-    </div>
-    <div class="input">
-        <label>Naam</label>
-        <InputText @bind-Value="BuildingProblem.UserName"></InputText>
-    </div>
-    <div class="input">
-        <label>Tel</label>
-        <InputText @bind-Value="BuildingProblem.UserTelephone"></InputText>
-    </div>
-    <div class="input">
-        <label>Email</label>
-        <InputText @bind-Value="BuildingProblem.UserEmail"></InputText>
-    </div>
-    
-    <button type="submit" @onclick="UploadProblem">Upload</button>
-</EditForm>
+        </div>
+        <div class="input">
+            <label>Naam</label>
+            <InputText @bind-Value="BuildingProblem.UserName"></InputText>
+        </div>
+        <div class="input">
+            <label>Tel</label>
+            <InputText @bind-Value="BuildingProblem.UserTelephone"></InputText>
+        </div>
+        <div class="input">
+            <label>Email</label>
+            <InputText @bind-Value="BuildingProblem.UserEmail"></InputText>
+        </div>
+
+        <button type="submit" @onclick="UploadProblem">Upload</button>
+    </EditForm>
+</div>
 
 @code
 {
